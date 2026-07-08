@@ -3,7 +3,6 @@ import { useSession, signOut } from 'next-auth/react'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { PushSubscribe } from './PushSubscribe'
 import { VoiceButton } from './VoiceButton'
 
 const TEAL = '#4A8C7A'
@@ -128,7 +127,6 @@ export function Navbar() {
 
         <div className="ml-auto flex items-center gap-3">
           <VoiceButton />
-          <PushSubscribe />
           <span className="text-sm hidden sm:block tracking-wide" style={{ color: `${INK}35` }}>
             {session?.user?.name?.split(' ')[0]}
           </span>
