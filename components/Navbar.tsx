@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { VoiceButton } from './VoiceButton'
 
-const TEAL = '#4A8C7A'
+const TEAL = '#ED2224'
 const INK = '#1a1a1a'
 const CREAM = '#EEECE6'
 const BORDER = '#d8d5ce'
