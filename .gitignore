@@ -1,0 +1,11 @@
+.env
+.env.local
+.env.production
+.env*.local
+node_modules/
+.next/
+.DS_Store
+.claude/
+tsconfig.tsbuildinfo
+public/appointment-template.pdf
+public/proposal-template.pdf
