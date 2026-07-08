@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --cream: #EEECE6;
+  --page-bg: #F7F6F2;
+  --teal: #4A8C7A;
+  --teal-dark: #3a7062;
+  --ink: #1a1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { background-color: #F7F6F2 !important; }
+body { font-family: var(--font-body); color: #1a1a1a; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c8c5bc; border-radius: 3px; }
+
+.hours-input {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  width: 100%;
+  padding: 4px 2px;
+  transition: all 0.15s;
+  color: #1a1a1a;
+}
+.hours-input:hover { border-color: #d0cdc5; background: white; }
+.hours-input:focus { outline: none; border-color: #4A8C7A; background: white; box-shadow: 0 0 0 2px rgba(74,140,122,0.12); }
+.hours-input.has-value { color: #3a7062; font-weight: 500; }
+
+.timesheet-row:hover .row-actions { opacity: 1; }
+.row-actions { opacity: 0; transition: opacity 0.15s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.2s ease; }
