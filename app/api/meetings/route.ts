@@ -14,6 +14,10 @@ export async function GET() {
     .order('created_at', { ascending: false })
     .limit(20)
 
-  if (error) return NextResponse.json({ error: 'Database error' }, { status: 500 })
+  if (error) {
+    console.error('Meetings API error:', error)
+    return NextResponse.json({ error: error.message, details: error }, { status: 500 })
+  }
+
   return NextResponse.json(data || [])
 }
