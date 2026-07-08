@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import type { Project, Stage, Client } from '@/types'
 import { clientLabel } from '@/types'
 
-const TEAL = '#4A8C7A'
+const TEAL = '#ED2224'
 const CREAM = '#EEECE6'
 const BORDER = '#d8d5ce'
 const INK = '#1a1a1a'
@@ -17,7 +17,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string }
   completed:   { label: 'Completed',    color: '#4A5568', bg: '#EDF2F7' },
 }
 
-const PROJECT_COLORS = ['#4A8C7A','#5B8DB8','#9B7FB6','#C4714A','#B8A84A','#7A6E9B','#C25C7A','#4A7A8C']
+const PROJECT_COLORS = ['#ED2224','#5B8DB8','#9B7FB6','#C4714A','#B8A84A','#7A6E9B','#C25C7A','#4A7A8C']
 const PROJECT_TYPES = [
   { value: 'time_materials', label: 'Time & Materials' },
   { value: 'fixed_fee', label: 'Fixed Fee' },
@@ -104,7 +104,7 @@ export default function ProjectsPage() {
     load()
   }
 
-  const BILLABLE_DOT   = '#4A8C7A'
+  const BILLABLE_DOT   = '#ED2224'
   const NONBILLABLE_DOT = '#9B7FB6'
 
   const billableProjects    = projects.filter(p => p.project_type !== 'non_billable')
@@ -287,7 +287,7 @@ export default function ProjectsPage() {
             {newStages.some(s => RIBA_STAGES.includes(s.name)) && delivTemplates.length > 0 && (
               <label className="flex items-center gap-2 mt-2 cursor-pointer select-none">
                 <input type="checkbox" checked={applyRibaTemplates} onChange={e => setApplyRibaTemplates(e.target.checked)}
-                  className="w-3.5 h-3.5" style={{ accentColor: '#4A8C7A' }} />
+                  className="w-3.5 h-3.5" style={{ accentColor: '#ED2224' }} />
                 <span className="text-xs" style={{ color: `${INK}60` }}>Apply Private Residential deliverables template to matching stages</span>
               </label>
             )}
