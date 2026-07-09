@@ -17,8 +17,8 @@ export async function GET(req: NextRequest) {
   if (projectId) query = query.eq('project_id', projectId)
   // FIX 4: validate assigneeId is a UUID before interpolating into PostgREST filter
   if (assigneeId && UUID_RE.test(assigneeId)) {
-    query = query.or(`assignee_id.eq.${assigneeId},assignee_ids.cs.{${assigneeId}}`)
-  }
+  query = query.eq('assignee_id', assigneeId)
+}
   const { data, error } = await query
   if (error) return NextResponse.json({ error: 'Database error' }, { status: 500 })
   return NextResponse.json(data)

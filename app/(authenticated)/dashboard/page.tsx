@@ -12,8 +12,8 @@ import clsx from 'clsx'
 
 type ViewMode = 'week' | 'day'
 
-const TEAL = '#4A8C7A'
-const TEAL_DARK = '#3a7062'
+const TEAL = '#ED2224'
+const TEAL_DARK = '#ED2224'
 const CREAM = '#EEECE6'
 const BORDER = '#d8d5ce'
 const INK = '#1a1a1a'
