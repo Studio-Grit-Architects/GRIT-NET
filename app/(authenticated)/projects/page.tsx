@@ -90,7 +90,9 @@ export default function ProjectsPage() {
       })
       if (applyRibaTemplates && sr.ok) {
         const stage = await sr.json()
-        const match = delivTemplates.find((t: any) => t.riba_stage === s.name)
+        const match = delivTemplates.find((t: any) =>
+  s.name.includes(t.riba_stage) || t.riba_stage.includes(s.name)
+)
         if (match) {
           await fetch('/api/deliverable-templates/apply', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
