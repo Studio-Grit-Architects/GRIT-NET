@@ -861,7 +861,7 @@ export default function ProjectPage() {
       )}
     </div>
   )
-})}
+)}
                           <button
                             onClick={() => toggleStageBillingField(stage.id, 'invoiced', !!stage.invoiced)}
                             className="h-6 px-2 rounded-full text-xs font-medium transition-all"
@@ -889,7 +889,7 @@ export default function ProjectPage() {
                         </div>
                       )}
                     </div>
-                  ))}
+                  )}
                 </div>
               )}
               {isAdmin && (
