@@ -827,9 +827,7 @@ export default function ProjectPage() {
                               onBlur={e => updateStageFee(stage.id, e.target.value)}
                               onKeyDown={e => e.key === 'Enter' && updateStageFee(stage.id, (e.target as HTMLInputElement).value)}
                             />
-                            </div>
-
-      {stageDeliverables.length > 0 && (
+                             {stageDeliverables.length > 0 && (
         <div className="ml-6 mt-2 space-y-1">
           {stageDeliverables.map(d => (
             <div key={d.id} className="flex items-center gap-2 text-xs">
@@ -840,6 +838,30 @@ export default function ProjectPage() {
                 className="w-3 h-3"
                 style={{ accentColor: TEAL }}
               />
+              <span
+                style={{
+                  color: d.completed ? `${INK}35` : `${INK}65`,
+                  textDecoration: d.completed ? 'line-through' : undefined,
+                }}
+              >
+                {d.title}
+              </span>
+              {isAdmin && (
+                <button
+                  onClick={() => deleteDeliverable(d.id)}
+                  className="text-xs"
+                  style={{ color: '#dc2626' }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+})}
                           <button
                             onClick={() => toggleStageBillingField(stage.id, 'invoiced', !!stage.invoiced)}
                             className="h-6 px-2 rounded-full text-xs font-medium transition-all"
