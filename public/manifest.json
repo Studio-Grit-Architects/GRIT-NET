@@ -1,11 +1,11 @@
 {
-  "name": "Macronet",
-  "short_name": "Macronet",
-  "description": "Macronet — Studio management for architecture practices",
+  "name": "GRIT-NET",
+  "short_name": "GRIT-NET",
+  "description": "GRIT-NET — Studio management for architecture practices",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#EEECE6",
-  "theme_color": "#4A8C7A",
+  "theme_color": "#ED2224",
   "orientation": "portrait-primary",
   "icons": [
     {
