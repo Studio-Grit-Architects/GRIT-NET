@@ -807,8 +807,12 @@ export default function ProjectPage() {
                 <p className="text-xs mb-2" style={{ color: `${INK}30` }}>No stages yet</p>
               ) : (
                 <div className="mb-3 space-y-1">
-                  {project.stages.map((stage: any) => (
-                    <div key={stage.id} className="flex items-center gap-2 py-1.5">
+                  {project.stages.map((stage: any) => {
+  const stageDeliverables = deliverables.filter(d => d.stage_id === stage.id)
+
+  return (
+    <div key={stage.id} className="py-1.5">
+      <div className="flex items-center gap-2">
                       <input type="checkbox" checked={stage.completed} onChange={() => toggleStage(stage)}
                         className="w-4 h-4 flex-shrink-0" style={{ accentColor: TEAL }} />
                       <span className="text-sm flex-1" style={{ color: stage.completed ? `${INK}35` : INK, textDecoration: stage.completed ? 'line-through' : undefined }}>{stage.name}</span>
@@ -823,7 +827,19 @@ export default function ProjectPage() {
                               onBlur={e => updateStageFee(stage.id, e.target.value)}
                               onKeyDown={e => e.key === 'Enter' && updateStageFee(stage.id, (e.target as HTMLInputElement).value)}
                             />
-                          </div>
+                            </div>
+
+      {stageDeliverables.length > 0 && (
+        <div className="ml-6 mt-2 space-y-1">
+          {stageDeliverables.map(d => (
+            <div key={d.id} className="flex items-center gap-2 text-xs">
+              <input
+                type="checkbox"
+                checked={d.completed}
+                onChange={e => toggleDeliverable(d.id, e.target.checked)}
+                className="w-3 h-3"
+                style={{ accentColor: TEAL }}
+              />
                           <button
                             onClick={() => toggleStageBillingField(stage.id, 'invoiced', !!stage.invoiced)}
                             className="h-6 px-2 rounded-full text-xs font-medium transition-all"
