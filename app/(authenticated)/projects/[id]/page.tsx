@@ -803,95 +803,160 @@ export default function ProjectPage() {
             {/* Stages */}
             <div>
               <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: `${INK}40` }}>Stages</div>
+
               {project.stages.length === 0 ? (
                 <p className="text-xs mb-2" style={{ color: `${INK}30` }}>No stages yet</p>
               ) : (
-                <div className="mb-3 space-y-1">
+                <div className="mb-3 space-y-3">
                   {project.stages.map((stage: any) => {
-  const stageDeliverables = deliverables.filter(d => d.stage_id === stage.id)
+                    const stageDeliverables = deliverables.filter(d => d.stage_id === stage.id)
 
-  return (
-    <div key={stage.id} className="py-1.5">
-      <div className="flex items-center gap-2">
-                      <input type="checkbox" checked={stage.completed} onChange={() => toggleStage(stage)}
-                        className="w-4 h-4 flex-shrink-0" style={{ accentColor: TEAL }} />
-                      <span className="text-sm flex-1" style={{ color: stage.completed ? `${INK}35` : INK, textDecoration: stage.completed ? 'line-through' : undefined }}>{stage.name}</span>
-                      {isAdmin ? (
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <div className="flex items-center gap-1">
-                            <span className="text-xs" style={{ color: `${INK}40` }}>£</span>
-                            <input
-                              type="number" defaultValue={stage.fee || ''} placeholder="0" min="0"
-                              className="w-20 h-7 px-2 rounded-lg text-xs text-right focus:outline-none"
-                              style={{ border: `1px solid ${BORDER}`, background: '#EEECE6' }}
-                              onBlur={e => updateStageFee(stage.id, e.target.value)}
-                              onKeyDown={e => e.key === 'Enter' && updateStageFee(stage.id, (e.target as HTMLInputElement).value)}
-                            />
-                             {stageDeliverables.length > 0 && (
-        <div className="ml-6 mt-2 space-y-1">
-          {stageDeliverables.map(d => (
-            <div key={d.id} className="flex items-center gap-2 text-xs">
-              <input
-                type="checkbox"
-                checked={d.completed}
-                onChange={e => toggleDeliverable(d.id, e.target.checked)}
-                className="w-3 h-3"
-                style={{ accentColor: TEAL }}
-              />
-              <span
-                style={{
-                  color: d.completed ? `${INK}35` : `${INK}65`,
-                  textDecoration: d.completed ? 'line-through' : undefined,
-                }}
-              >
-                {d.title}
-              </span>
-              {isAdmin && (
-                <button
-                  onClick={() => deleteDeliverable(d.id)}
-                  className="text-xs"
-                  style={{ color: '#dc2626' }}
-                >
-                  ×
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-)}
-                          <button
-                            onClick={() => toggleStageBillingField(stage.id, 'invoiced', !!stage.invoiced)}
-                            className="h-6 px-2 rounded-full text-xs font-medium transition-all"
-                            style={stage.invoiced
-                              ? { background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE' }
-                              : { background: CREAM, color: `${INK}35`, border: `1px solid ${BORDER}` }}
+                    return (
+                      <div key={stage.id} className="py-2" style={{ borderBottom: `1px solid ${BORDER}` }}>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={stage.completed}
+                            onChange={() => toggleStage(stage)}
+                            className="w-4 h-4 flex-shrink-0"
+                            style={{ accentColor: TEAL }}
+                          />
+
+                          <span
+                            className="text-sm flex-1"
+                            style={{
+                              color: stage.completed ? `${INK}35` : INK,
+                              textDecoration: stage.completed ? 'line-through' : undefined,
+                            }}
                           >
-                            Invoiced
-                          </button>
-                          <button
-                            onClick={() => toggleStageBillingField(stage.id, 'paid', !!stage.paid)}
-                            className="h-6 px-2 rounded-full text-xs font-medium transition-all"
-                            style={stage.paid
-                              ? { background: '#E8F5EE', color: '#2E6B52', border: '1px solid #A7D7C5' }
-                              : { background: CREAM, color: `${INK}35`, border: `1px solid ${BORDER}` }}
-                          >
-                            Paid
-                          </button>
+                            {stage.name}
+                          </span>
+
+                          {isAdmin ? (
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              <div className="flex items-center gap-1">
+                                <span className="text-xs" style={{ color: `${INK}40` }}>£</span>
+                                <input
+                                  type="number"
+                                  defaultValue={stage.fee || ''}
+                                  placeholder="0"
+                                  min="0"
+                                  className="w-20 h-7 px-2 rounded-lg text-xs text-right focus:outline-none"
+                                  style={{ border: `1px solid ${BORDER}`, background: '#EEECE6' }}
+                                  onBlur={e => updateStageFee(stage.id, e.target.value)}
+                                  onKeyDown={e => e.key === 'Enter' && updateStageFee(stage.id, (e.target as HTMLInputElement).value)}
+                                />
+                              </div>
+
+                              <button
+                                onClick={() => toggleStageBillingField(stage.id, 'invoiced', !!stage.invoiced)}
+                                className="h-6 px-2 rounded-full text-xs font-medium transition-all"
+                                style={stage.invoiced
+                                  ? { background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE' }
+                                  : { background: CREAM, color: `${INK}35`, border: `1px solid ${BORDER}` }}
+                              >
+                                Invoiced
+                              </button>
+
+                              <button
+                                onClick={() => toggleStageBillingField(stage.id, 'paid', !!stage.paid)}
+                                className="h-6 px-2 rounded-full text-xs font-medium transition-all"
+                                style={stage.paid
+                                  ? { background: '#E8F5EE', color: '#2E6B52', border: '1px solid #A7D7C5' }
+                                  : { background: CREAM, color: `${INK}35`, border: `1px solid ${BORDER}` }}
+                              >
+                                Paid
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                              {stage.fee > 0 && <span className="text-xs font-mono" style={{ color: TEAL_DARK }}>£{Number(stage.fee).toLocaleString()}</span>}
+                              {stage.invoiced && <span className="h-5 px-1.5 rounded-full text-xs" style={{ background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE' }}>Invoiced</span>}
+                              {stage.paid && <span className="h-5 px-1.5 rounded-full text-xs" style={{ background: '#E8F5EE', color: '#2E6B52', border: '1px solid #A7D7C5' }}>Paid</span>}
+                            </div>
+                          )}
                         </div>
-                      ) : (
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          {stage.fee > 0 && <span className="text-xs font-mono" style={{ color: TEAL_DARK }}>£{Number(stage.fee).toLocaleString()}</span>}
-                          {stage.invoiced && <span className="h-5 px-1.5 rounded-full text-xs" style={{ background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE' }}>Invoiced</span>}
-                          {stage.paid && <span className="h-5 px-1.5 rounded-full text-xs" style={{ background: '#E8F5EE', color: '#2E6B52', border: '1px solid #A7D7C5' }}>Paid</span>}
+
+                        <div className="ml-6 mt-2 space-y-1">
+                          {stageDeliverables.length === 0 ? (
+                            <p className="text-xs" style={{ color: `${INK}30` }}>No deliverables yet</p>
+                          ) : (
+                            stageDeliverables.map(d => (
+                              <div key={d.id} className="flex items-center gap-2 text-xs">
+                                <input
+                                  type="checkbox"
+                                  checked={d.completed}
+                                  onChange={e => toggleDeliverable(d.id, e.target.checked)}
+                                  className="w-3 h-3"
+                                  style={{ accentColor: TEAL }}
+                                />
+                                <span
+                                  className="flex-1"
+                                  style={{
+                                    color: d.completed ? `${INK}35` : `${INK}65`,
+                                    textDecoration: d.completed ? 'line-through' : undefined,
+                                  }}
+                                >
+                                  {d.title}
+                                </span>
+                                {isAdmin && (
+                                  <button
+                                    onClick={() => deleteDeliverable(d.id)}
+                                    className="text-xs"
+                                    style={{ color: '#dc2626' }}
+                                  >
+                                    ×
+                                  </button>
+                                )}
+                              </div>
+                            ))
+                          )}
+
+                          {isAdmin && (
+                            <div className="flex gap-2 pt-1">
+                              <input
+                                value={newDeliverableInputs[stage.id] || ''}
+                                onChange={e => setNewDeliverableInputs(prev => ({ ...prev, [stage.id]: e.target.value }))}
+                                placeholder="Add deliverable…"
+                                className="flex-1 h-7 px-2 rounded-lg text-xs focus:outline-none"
+                                style={{ border: `1px solid ${BORDER}`, background: '#EEECE6' }}
+                                onKeyDown={e => e.key === 'Enter' && addDeliverable(stage.id)}
+                              />
+                              <button
+                                onClick={() => addDeliverable(stage.id)}
+                                className="h-7 px-2 rounded-lg text-xs"
+                                style={{ border: `1px solid ${BORDER}`, color: `${INK}60`, background: 'white' }}
+                              >
+                                + Add
+                              </button>
+                            </div>
+                          )}
+
+                          {isAdmin && templates.length > 0 && (
+                            <select
+                              defaultValue=""
+                              onChange={e => {
+                                if (e.target.value) {
+                                  applyTemplateToStage(e.target.value, stage.id)
+                                  e.currentTarget.value = ''
+                                }
+                              }}
+                              className="h-7 px-2 rounded-lg text-xs focus:outline-none"
+                              style={{ border: `1px solid ${BORDER}`, background: 'white', color: `${INK}60` }}
+                            >
+                              <option value="">Apply deliverable template…</option>
+                              {templates.map((t: any) => (
+                                <option key={t.id} value={t.id}>{t.name}</option>
+                              ))}
+                            </select>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  )}
+                      </div>
+                    )
+                  })}
                 </div>
               )}
+
               {isAdmin && (
                 <div className="flex gap-2">
                   <input value={stageInput} onChange={e => setStageInput(e.target.value)}
